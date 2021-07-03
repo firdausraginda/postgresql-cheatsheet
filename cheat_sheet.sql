@@ -107,3 +107,8 @@ ON CONFLICT (id) DO UPDATE SET first_name = EXCLUDED.first_name, last_name = EXC
 -- update foreign key column
 UPDATE <table_name> SET <fk_column_name> = <fk_column_value> WHERE <column_name> = <column_value>;
 UPDATE person SET car_id = 2 WHERE id = 1;
+
+-- SEQUENCE --------------------------------------------
+-- restart the sequence to 1
+ALTER SEQUENCE <sequence_name> RESTART WITH <number>;
+ALTER SEQUENCE person_id_seq RESTART WITH 1;
