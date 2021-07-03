@@ -21,6 +21,11 @@ DROP DATABASE <db_name>
 
 -- to create new table with respective column & data type
 -- postgres list of data types: https://www.postgresql.org/docs/11/datatype.html
+CREATE TABLE <table_name> (
+  <column_name> <data_type> [NOT NULL] [PRIMARY KEY],
+  <column_name> <data_type> [NOT NULL],  
+);
+
 CREATE TABLE person (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -28,14 +33,17 @@ CREATE TABLE person (
     gender VARCHAR(15) NOT NULL,
     date_of_birth DATE NOT NULL,
     email VARCHAR(150)
-)
+);
 
 -- to delete a table
 DROP TABLE <table_name>
 
 -- to insert values to a table
+INSERT INTO <table_name> (column1, column2, column3)
+VALUES (value1, value2, value3);
+
 INSERT INTO person (first_name, last_name, gender, date_of_birth, email)
-VALUES ('Anne', 'Smith', 'FEMALE', date '1988-01-09', 'annesmith@gmail.com')
+VALUES ('Anne', 'Smith', 'FEMALE', date '1988-01-09', 'annesmith@gmail.com');
 
 -- to get the table content
 select *
@@ -91,3 +99,7 @@ ON CONFLICT (<column_name>) DO UPDATE SET <column_name> = EXCLUDED.<column_name>
 INSERT INTO person (id, first_name, last_name, gender, date_of_birth, email)
 VALUES (1, 'Sukinem', 'Marfuah', 'Female', date '2000-01-01', 'marfuah@gmail.com')
 ON CONFLICT (id) DO UPDATE SET first_name = EXCLUDED.first_name, last_name = EXCLUDED.last_name, email = EXCLUDED.email;
+
+-- TABLE RELATIONS --------------------------------------------
+-- to get list of relations
+\dt
