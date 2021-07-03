@@ -103,3 +103,7 @@ ON CONFLICT (id) DO UPDATE SET first_name = EXCLUDED.first_name, last_name = EXC
 -- TABLE RELATIONS --------------------------------------------
 -- to get list of relations
 \dt
+
+-- update foreign key column
+UPDATE <table_name> SET <fk_column_name> = <fk_column_value> WHERE <column_name> = <column_value>;
+UPDATE person SET car_id = 2 WHERE id = 1;
