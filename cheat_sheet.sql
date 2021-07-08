@@ -11,6 +11,39 @@ DROP DATABASE <db_name>
 -- to connect to database
 \c <db_name>
 
+-- to connect to database with specific user
+\c <db_name> <user_name>
+
+-- USER --------------------------------------------
+
+-- to get list or users with the privileges info
+\du
+
+-- to create user with password
+CREATE USER <user_name> WITH ENCRYPTED PASSWORD '<password>';
+
+-- to grant all privileges on certain database to a user
+GRANT ALL PRIVILEGES ON DATABASE <database_name> to <user_name>;
+
+-- to drop user
+DROP USER <user_name>;
+
+-- SCHEMA --------------------------------------------
+
+-- to get list of schemas
+\dn
+
+-- to create schema and its authorization
+CREATE SCHEMA <schema_name> AUTHORIZATION <user_name>;
+
+-- to show the active schema
+SHOW search_path;
+
+-- to set to new schema
+SET search_path to <schema_name>;
+
+-- to drop schema
+DROP SCHEMA <schema_name>;
 
 -- TABLE --------------------------------------------
 -- to get list of tables
