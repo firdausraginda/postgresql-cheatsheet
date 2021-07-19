@@ -56,7 +56,7 @@ DROP SCHEMA <schema_name>;
 -- postgres list of data types: https://www.postgresql.org/docs/11/datatype.html
 CREATE TABLE <table_name> (
   <column_name> <data_type> [NOT NULL] [PRIMARY KEY],
-  <column_name> <data_type> [NOT NULL],  
+  <column_name> <data_type> [NOT NULL]
 );
 
 CREATE TABLE person (
@@ -66,6 +66,29 @@ CREATE TABLE person (
     gender VARCHAR(15) NOT NULL,
     date_of_birth DATE NOT NULL,
     email VARCHAR(150)
+);
+
+-- to create table with foreign key
+CREATE TABLE <table_name> (
+  <column_name> <data_type> [NOT NULL] [PRIMARY KEY],
+  <column_name> <data_type> REFERENCES <referenced_table_name>(<referenced_column_name>)
+);
+
+CREATE TABLE family (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  person_id BIGSERIAL REFERENCES person(id)
+);
+
+-- to set delete types for referenced table
+-- delete types: CASCADE, RESTRICT, SET NULL, SET DEFAULT
+CREATE TABLE <table_name> (
+  <column_name> <data_type> [NOT NULL] [PRIMARY KEY],
+  <column_name> <data_type> REFERENCES <referenced_table_name>(<referenced_column_name>) ON DELETE <delete_type>
+);
+
+CREATE TABLE family (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  person_id BIGSERIAL REFERENCES person(id) ON DELETE CASCADE
 );
 
 -- to delete a table
@@ -93,6 +116,10 @@ ALTER TABLE person ADD CONSTRAINT unique_email_address UNIQUE (email);
 -- add constraint check to gender column
 ALTER TABLE <table_name> ADD CONSTRAINT <random_constraint_name> CHECK (<check_rule>);
 ALTER TABLE person ADD CONSTRAINT gender_check_constraint CHECK (gender IN ('Genderqueer', 'Bigender', 'Genderfluid', 'Male', 'Polygender', 'Non-binary', 'Female', 'Agender'));
+
+-- to add foreign key constraint and delete type
+ALTER TABLE <table_name> ADD CONSTRAINT <random_constraint_name> FOREIGN KEY (<foreign_key_column>) REFERENCES <referenced_table_name>(<referenced_column_name>) ON DELETE <delete_type>;
+ALTER TABLE family ADD CONSTRAINT fk_person_id FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE;
 
 -- delete constraint
 ALTER TABLE <table_name> DROP CONSTRAINT <random_constraint_name>;
