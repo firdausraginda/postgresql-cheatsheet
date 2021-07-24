@@ -3,7 +3,7 @@
 ## Reference Link
 - [PostgreSQL data types](https://www.postgresql.org/docs/11/datatype.html)
 
-## Mosth Common Data Types
+## Most Common Data Types
 - **text**: character strings of any length
 - **varchar [ n ]**: a maximum of n characters
 - **char [ n ]**: a fixed-length string of n characters
