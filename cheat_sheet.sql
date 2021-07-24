@@ -165,8 +165,13 @@ ON CONFLICT (id) DO UPDATE SET first_name = EXCLUDED.first_name, last_name = EXC
 \dt
 
 -- update foreign key column
-UPDATE <table_name> SET <fk_column_name> = <fk_column_value> WHERE <column_name> = <column_value>;
-UPDATE person SET car_id = 2 WHERE id = 1;
+UPDATE <table_name> SET <fk_column_name> = <referenced_fk_column_name> 
+FROM <referenced_table_name> 
+WHERE <column_name> = <column_value>;
+
+UPDATE affiliations SET professor_id = professors.id
+FROM professors
+WHERE affiliations.firstname = professors.firstname AND affiliations.lastname = professors.lastname;
 
 -- SEQUENCE --------------------------------------------
 -- restart the sequence to 1
